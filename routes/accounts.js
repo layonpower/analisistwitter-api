@@ -13,17 +13,17 @@ var twitterV2 = require("twitter-v2");
 require('dotenv').config();
 
 
-router.get('/:id', async function main(req, res, next) {
+router.get('/:username', async function main(req, res, next) {
     const client = new twitterV2({
       bearer_token: process.env.BEARER_TOKEN ,
     });
   
-    const { data,errors } = await client.get('tweets'
+    const { data,errors } = await client.get('users/by'
     , { 
-    //ids: '1370805087254290432' 
-    ids: req.params.id
-    , tweet: {
-              fields: ['entities', 'public_metrics', 'author_id'],
+    //usernames: 'NoGuru_com' 
+    usernames: req.params.username
+    , user: {
+              fields: ['id','public_metrics','name', 'username'],
             }
     }
     );
