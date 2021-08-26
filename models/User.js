@@ -13,7 +13,8 @@ var UserSchema = new Schema({
   fullname: String,
   email: { type: String, required: true},
   creationdate: { type: Date, default: Date.now },
-  role: { type: String, enum: ['admin','subscriber'], default: 'subscriber' }
+  role: { type: String, enum: ['admin','subscriber'], default: 'subscriber' },
+  posts: [{ type: Schema.ObjectId, ref: 'Post', default: null }]
 });
 
 UserSchema.pre('save', function(next) {
