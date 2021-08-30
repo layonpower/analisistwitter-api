@@ -4,3 +4,5 @@
 # misc
 .env
 modules.txt
+metrics.txt
+llamadasAPI.txt

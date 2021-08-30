@@ -10,6 +10,8 @@ var usersRouter = require('./routes/users');
 var postsRouter = require('./routes/posts');
 var tweetsRouter = require('./routes/tweets');
 var accountRouter = require('./routes/accounts');
+var accountMetricsRouter = require('./routes/accountmetrics');
+var tweetMetricsRouter = require('./routes/tweetmetrics');
 
 var bodyParser  = require("body-parser");   
 var cors = require('cors');   
@@ -43,8 +45,8 @@ app.use('/users', usersRouter);
 app.use('/posts', postsRouter);
 app.use('/tweets',tweetsRouter);
 app.use('/accounts',accountRouter);
-
-
+app.use('/accountmetrics',accountMetricsRouter);
+app.use('/tweetmetrics',tweetMetricsRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
