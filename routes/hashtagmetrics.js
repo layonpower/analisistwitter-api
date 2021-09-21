@@ -75,7 +75,7 @@ async function get_reach_byhashtag(hashtag) {
     
     do {
         if (token =='X') {
-              let { data,meta } = await  client.get('tweets/search/recent?query=LeyendaCabezas'
+              let { data,meta } = await  client.get('tweets/search/recent?query='+hashtag
               , {  
                 tweet: {
                          fields: ['author_id'],
@@ -98,7 +98,7 @@ async function get_reach_byhashtag(hashtag) {
         }
         else {
                   let { data,meta } = await 
-                  client.get('tweets/search/recent?query=LeyendaCabezas&next_token='+token 
+                  client.get('tweets/search/recent?query='+hashtag+'&next_token='+token 
                   , {  
                     tweet: {
                              fields: ['author_id'],

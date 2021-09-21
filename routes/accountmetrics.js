@@ -15,16 +15,23 @@ var twitterV2 = require("twitter-v2");
 require('dotenv').config();
 
 
-router.get('/:id', async function main(req, res, next) {
+router.get('/:id/:fini/:ffin', async function main(req, res, next) {
 
     //fechas de analisis
-    const fecha_ini='2021-07-31T00:00:00Z';
-    const fecha_fin='2021-08-21T00:00:00Z';
+    //const fecha_ini='2021-07-01T00:00:00Z';
+    //const fecha_fin='2021-08-31T00:00:00Z';
+
+    const fecha_ini=req.params.fini;
+    const fecha_fin=req.params.ffin;
+
+    console.log(fecha_ini);
+    console.log(fecha_fin);
 
     //ALCANCE
     //Seguidores de una cuenta  
     let followers= await get_followers(req.params.id);
     //seguidores de los seguiores
+    let followonk = 100;
     //let followonk = await get_follower_Wonk (req.params.id);
     //Tasa de tuits por dia
     let tweet_dia= await get_tweets_bydate(req.params.id,fecha_ini,fecha_fin);
@@ -44,13 +51,15 @@ router.get('/:id', async function main(req, res, next) {
     
 
     const metrics = {
+        //seguidores: followers
         seguidores: followers,
-        //seguidoreswonk : followonk,
-        tweet_day : tweet_dia
-        //tff : TFF,
-        //rt_rate : tasa_rt,
-        //engagement_rate: tasa_compromiso,
-        //participation_rate: tasa_participacion
+        seguidoreswonk : followonk,
+        //seguidoreswonk : 234543,
+        tweet_day : tweet_dia,
+        tff : TFF,
+        rt_rate : tasa_rt,
+        engagement_rate: tasa_compromiso,
+        participation_rate: tasa_participacion
 
     };
     let respuesta = JSON.stringify(metrics);
@@ -77,7 +86,8 @@ async function get_followers(id) {
       }
       );
   
-      
+      console.log(data);
+
       if (errors) {
         console.log('Errors:', errors);
         res.status(230).json(errors);
@@ -179,8 +189,16 @@ async function get_follower_Wonk(id) {
 
     //por cada id de usuario calculamos su número de seguidores
     for  (const value of id_users) {
+        //console.log('user: '+value);
+        //if (value!=77778811 && value!= 12991533 && value!=580690746 && value!=112991533) {
         const followers = await get_followers(value);
+        /*if (followers > 100000){
+            console.log('user: '+value);
+            console.log('seguidores: '+followers);
+        }*/
+        //console.log(followers);
         suma = suma + followers;
+        //}
     }
 
     return (suma);

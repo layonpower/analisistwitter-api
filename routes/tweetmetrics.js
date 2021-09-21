@@ -53,13 +53,7 @@ async function get_interaction(id) {
       //console.log(data);
       let dato= data[0];
       let interaccion = dato.public_metrics.retweet_count + dato.public_metrics.reply_count + dato.public_metrics.like_count;
-      /*let interaccion;
-      console.log(dato.public_metrics.referenced_tweets.type);
-      if (dato.public_metrics.referenced_tweets.type=='retweeted')
-         interaccion=0;
-      else
-         interaccion = dato.public_metrics.retweet_count + dato.public_metrics.reply_count + dato.public_metrics.like_count;
-     */
+
       return (interaccion);
   
     

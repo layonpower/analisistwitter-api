@@ -7,6 +7,7 @@ var Schema = mongoose.Schema;
 var bcrypt = require('bcryptjs');
 var SALT_WORK_FACTOR = 10;
 
+
 var UserSchema = new Schema({
   username: { type: String, required: true, index:{ unique: true} },
   password: { type: String, required: true },
@@ -14,8 +15,12 @@ var UserSchema = new Schema({
   email: { type: String, required: true},
   creationdate: { type: Date, default: Date.now },
   role: { type: String, enum: ['admin','subscriber'], default: 'subscriber' },
-  posts: [{ type: Schema.ObjectId, ref: 'Post', default: null }]
+  //posts: [{ type: Schema.ObjectId, ref: 'Post', default: null }]
+  posts: [{ type: Schema.ObjectId, default: null }]
 });
+
+
+  
 
 UserSchema.pre('save', function(next) {
     var user = this;

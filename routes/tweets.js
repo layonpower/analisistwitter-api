@@ -20,7 +20,6 @@ router.get('/:id', async function main(req, res, next) {
   
     const { data,errors } = await client.get('tweets'
     , { 
-    //ids: '1370805087254290432' 
     ids: req.params.id
     , tweet: {
               fields: ['entities', 'public_metrics', 'author_id'],

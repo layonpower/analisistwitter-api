@@ -7,7 +7,6 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var postsRouter = require('./routes/posts');
 var tweetsRouter = require('./routes/tweets');
 var accountRouter = require('./routes/accounts');
 var accountMetricsRouter = require('./routes/accountmetrics');
@@ -24,7 +23,7 @@ var mongoose = require('mongoose');
 mongoose.set('useCreateIndex', true);
 
 mongoose.connect(process.env.DB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() =>  console.log('mymerndb connection successful'))
+    .then(() =>  console.log('Conexión a la BD establecida correctamente'))
     .catch((err) => console.error(err));
 
 
@@ -44,7 +43,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/posts', postsRouter);
 app.use('/tweets',tweetsRouter);
 app.use('/accounts',accountRouter);
 app.use('/accountmetrics',accountMetricsRouter);
